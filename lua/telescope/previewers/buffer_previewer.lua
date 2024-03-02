@@ -317,18 +317,14 @@ local handle_buffer_preview = function(filepath, bufnr, opts)
   end)
 end
 
-local PREVIEW_TIMEOUT_MS = 250
-local PREVIEW_FILESIZE_MB = 25
-local PREVIEW_HIGHLIGHT_MB = 1
-
 previewers.file_maker = function(filepath, bufnr, opts)
   opts = vim.F.if_nil(opts, {})
   opts.preview = vim.F.if_nil(opts.preview, {})
-  opts.preview.timeout = vim.F.if_nil(opts.preview.timeout, PREVIEW_TIMEOUT_MS)
-  opts.preview.filesize_limit = vim.F.if_nil(opts.preview.filesize_limit, PREVIEW_FILESIZE_MB)
-  opts.preview.highlight_limit = vim.F.if_nil(opts.preview.highlight_limit, PREVIEW_HIGHLIGHT_MB)
-  opts.preview.msg_bg_fillchar = vim.F.if_nil(opts.preview.msg_bg_fillchar, "╱")
-  opts.preview.treesitter = vim.F.if_nil(opts.preview.treesitter, true)
+  opts.preview.timeout = vim.F.if_nil(opts.preview.timeout, conf.preview.timeout)
+  opts.preview.filesize_limit = vim.F.if_nil(opts.preview.filesize_limit, conf.preview.filesize_limit)
+  opts.preview.highlight_limit = vim.F.if_nil(opts.preview.highlight_limit, conf.preview.highlight_limit)
+  opts.preview.msg_bg_fillchar = vim.F.if_nil(opts.preview.msg_bg_fillchar, conf.preview.msg_bg_fillchar)
+  opts.preview.treesitter = vim.F.if_nil(opts.preview.treesitter, conf.preview.treesitter)
   opts.use_ft_detect = vim.F.if_nil(opts.use_ft_detect, true)
 
   vim.validate {
